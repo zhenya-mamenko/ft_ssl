@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:23:08 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 12:45:55 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/20 14:43:18 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,22 @@ void		print_standard_commands(void)
 	print_commands_by_type(ciph);
 	ft_printf("\n");
 	exit(1);
+}
+
+void		print_options_for_command(t_cmd *cmd)
+{
+	int		i;
+	char	*s;
+
+	system("tabs 4,+10,+40");
+	ft_printf("\n");
+	i = 0;
+	while (i < cmd->param_count)
+	{
+		ft_sprintf(&s, cmd->params[i].description);
+		ft_printf("\t%s\t%s\n", cmd->params[i].param, s);
+		ft_strdel(&s);
+		i++;
+	}
+	exit(2);
 }

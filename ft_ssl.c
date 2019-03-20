@@ -6,15 +6,30 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:15:38 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 12:41:56 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/20 14:34:41 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-int		main(int ac, char **av)
+static size_t	process_params(t_cmd *cmd, int *cnt, char **av)
+{
+	size_t	result;
+
+	result = check_params(cnt, av);
+	if (result == 1)
+	{
+		error(ft_ssprintf("'%s' is an illegal option.\n", av[*cnt]), 0, 1);
+		print_options_for_command(cmd);
+	}
+	return (result);
+}
+
+int				main(int ac, char **av)
 {
 	t_cmd	*cmd;
+	int		cnt;
+	size_t	f;
 
 	if (ac == 1)
 		print_usage();
@@ -24,4 +39,7 @@ int		main(int ac, char **av)
 		error(ft_ssprintf("'%s' is an invalid command.\n", av[1]), 0, 1);
 		print_standard_commands();
 	}
+	cnt = ac - 2;
+	if (cnt != 0)
+		f = process_params(cmd, &cnt, &av[2]);
 }

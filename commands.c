@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:49:55 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 12:40:39 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/20 14:35:25 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,11 @@ t_cmd	*check_commands(char *command)
 		i++;
 	}
 	return (NULL);
+}
+
+size_t	check_params(int *ac, char **av)
+{
+	if (ac == 0 || av == NULL)
+		;
+	return (1);
 }
