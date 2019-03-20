@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:24:33 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 14:32:22 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/20 15:21:25 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,20 @@ typedef struct		s_param
 	size_t			flag;
 }					t_param;
 
+typedef size_t		(*t_fn)(void *, void *, int);
+
 typedef struct		s_cmd
 {
 	char			*command;
 	t_ct			type;
 	int				param_count;
 	t_param			*params;
+	t_fn			fn;
 }					t_cmd;
 
 static int			g_cmd_count = 2;
 
-static t_param		g_md5_params[] =
+static t_param		g_md5_sha_params[] =
 {
 	{
 		"-p",
@@ -67,8 +70,8 @@ static t_param		g_md5_params[] =
 
 static t_cmd		g_commands[] =
 {
-	{"md5", dgst, 4, g_md5_params},
-	{"sha256", dgst, 0, NULL}
+	{"md5", dgst, 4, g_md5_sha_params, NULL},
+	{"sha256", dgst, 4, g_md5_sha_params, NULL}
 };
 
 void				error(char *message, int and_exit, int and_free);
@@ -76,6 +79,6 @@ void				print_usage(void);
 void				print_standard_commands(void);
 void				print_options_for_command(t_cmd *cmd);
 t_cmd				*check_commands(char *command);
-size_t				check_params(int *ac, char **av);
+size_t				check_params(t_cmd *cmd, int *ac, char **av);
 
 #endif
