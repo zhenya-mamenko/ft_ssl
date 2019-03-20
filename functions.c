@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ssl.c                                           :+:      :+:    :+:   */
+/*   functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/20 11:15:38 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 12:41:56 by emamenko         ###   ########.fr       */
+/*   Created: 2019/03/20 12:29:13 by emamenko          #+#    #+#             */
+/*   Updated: 2019/03/20 12:34:15 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-int		main(int ac, char **av)
+void	error(char *message, int and_exit, int and_free)
 {
-	t_cmd	*cmd;
-
-	if (ac == 1)
-		print_usage();
-	cmd = check_commands(av[1]);
-	if (cmd == NULL)
-	{
-		error(ft_ssprintf("'%s' is an invalid command.\n", av[1]), 0, 1);
-		print_standard_commands();
-	}
+	ft_printf("%s: Error: %s", NAME, message);
+	if (and_free == 1)
+		free(message);
+	if (and_exit == 1)
+		exit(2);
 }

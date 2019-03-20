@@ -6,15 +6,15 @@
 #    By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/20 11:27:05 by emamenko          #+#    #+#              #
-#    Updated: 2019/03/20 11:34:21 by emamenko         ###   ########.fr        #
+#    Updated: 2019/03/20 12:45:18 by emamenko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-.PHONY:		$(NAME) all clean fclean re reclean
+.PHONY:		$(NAME) all clean fclean re reclean del reexec
 
 NAME	=	ft_ssl
-SOURCES	=	ft_ssl.c print.c
+SOURCES	=	ft_ssl.c print.c commands.c functions.c
 
 all:		$(NAME)
 
@@ -34,3 +34,8 @@ re: 		fclean all
 
 reclean:	re; make clean;
 			make -C libft/ reclean
+
+del:
+			rm -f $(NAME)
+
+reexec:		del all
