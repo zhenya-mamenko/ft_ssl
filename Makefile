@@ -6,7 +6,7 @@
 #    By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/20 11:27:05 by emamenko          #+#    #+#              #
-#    Updated: 2019/03/21 12:14:29 by emamenko         ###   ########.fr        #
+#    Updated: 2019/03/21 14:02:54 by emamenko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 
 NAME	=	ft_ssl
 SOURCES	=	ft_ssl.c print.c commands.c functions.c input.c \
-			md5/md5.c md5/md5_agl.c md5/md5_transform.c
+			md5/md5.c md5/md5_alg.c md5/md5_transform.c
 
 all:		$(NAME)
 

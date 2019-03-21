@@ -6,11 +6,11 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:24:40 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 13:35:06 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 14:14:51 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ssl.h"
+#include "../ft_ssl.h"
 #include "md5.h"
 
 static void	process_files(size_t f, u_int cnt, char **av)
@@ -27,7 +27,7 @@ static void	process_files(size_t f, u_int cnt, char **av)
 		if (fd != -1)
 		{
 			print_hash((f & 8) && !(f & 4) ? MD5_TEMPLATE_R : MD5_TEMPLATE,
-				av[i], (md5 = md5_file(av[i], fd)), f);
+				av[i], (md5 = md5_file(fd)), f);
 			ft_strdel(&md5);
 			close(fd);
 		}
@@ -55,7 +55,7 @@ static char	*md5_digest(u_char digest[16])
 	return (result);
 }
 
-char		*md5_file(char *s, int fd)
+char		*md5_file(int fd)
 {
 	u_char	digest[16];
 	u_char	buf[1024];
@@ -63,7 +63,7 @@ char		*md5_file(char *s, int fd)
 	int		len;
 
 	md5_init(&ctx);
-	while (len = read(fd, buf, 1024))
+	while ((len = read(fd, buf, 1024)) > 0)
 		md5_update(&ctx, buf, len);
 	md5_final(&ctx, digest);
 	return (md5_digest(digest));
@@ -75,7 +75,7 @@ char		*md5_str(char *s)
 	t_ctx	ctx;
 
 	md5_init(&ctx);
-	md5_update(&ctx, s, ft_strlen(s));
+	md5_update(&ctx, (u_char *)s, ft_strlen(s));
 	md5_final(&ctx, digest);
 	return (md5_digest(digest));
 }

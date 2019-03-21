@@ -6,11 +6,11 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 21:33:03 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 14:02:16 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 14:14:58 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ssl.h"
+#include "../ft_ssl.h"
 #include "md5.h"
 
 void		md5_init(t_ctx *ctx)
@@ -48,7 +48,7 @@ void		md5_update(t_ctx *ctx, u_char *buf, u_int len)
 	}
 	else
 		i = 0;
-	ft_memcpy(&ctx->buf[index], buf[i], len - i);
+	ft_memcpy(&ctx->buf[index], &buf[i], len - i);
 }
 
 static void	md5_encode(u_char *b, u_int *x, u_int len)
