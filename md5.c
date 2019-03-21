@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:24:40 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 20:18:28 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/20 20:27:58 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 char		*md5_file(char *s)
 {
-	return (ft_strdup("ho-ho-ho!"));
+	return (ft_ssprintf("ho-ho-ho, file: %s!", s));
 }
 
 char		*md5_str(char *s)
 {
-	return (ft_strdup("ho-ho-ho FILE!"));
+	return (ft_ssprintf("ho-ho-ho: %s!", s));
 }
 
 static void	process_files(size_t f, int cnt, char **av)
 {
-	size_t	i;
+	int		i;
 	char	*md5;
 
 	i = 0;
@@ -32,7 +32,7 @@ static void	process_files(size_t f, int cnt, char **av)
 	{
 		print_hash((f & 8) && !(f & 4) ? MD5_TEMPLATE_R : MD5_TEMPLATE,
 			av[i], (md5 = md5_file(av[i])), f);
-		ft_strdel(md5);
+		ft_strdel(&md5);
 		i++;
 	}
 }
@@ -51,14 +51,16 @@ void		process_md5(size_t f, int cnt, char **av)
 			ft_printf("%s\n", stdin);
 		md5 = md5_str(stdin);
 		print_hash("%s\n", stdin, md5, 0);
-		ft_strdel(stdin);
-		ft_strdel(md5);
+		ft_strdel(&stdin);
+		ft_strdel(&md5);
 	}
 	if ((f & 65536) && cnt--)
 	{
+		stdin = ft_ssprintf("\"%s\"", *av++);
 		print_hash((f & 8) && !(f & 4) ? MD5_TEMPLATE_R : MD5_TEMPLATE,
-			av, (md5 = md5_str(av++)), f);
-		ft_strdel(md5);
+			stdin, (md5 = md5_str(stdin)), f);
+		ft_strdel(&md5);
+		ft_strdel(&stdin);
 	}
 	process_files(f, cnt, av);
 }
