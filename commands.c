@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:49:55 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 15:08:40 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/20 16:24:09 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ size_t	check_params(t_cmd *cmd, int *ac, char **av)
 	while (i < *ac)
 	{
 		if (av[i][0] != '-')
-			return (f);
+			break ;
 		j = -1;
 		while (++j < cmd->param_count)
 			if (ft_strcmp(av[i], cmd->params[j].param) == 0)
@@ -49,5 +49,6 @@ size_t	check_params(t_cmd *cmd, int *ac, char **av)
 			return (1);
 		i++;
 	}
+	*ac -= i;
 	return (f);
 }

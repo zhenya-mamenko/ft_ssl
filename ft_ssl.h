@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:24:33 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 15:21:25 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/20 19:08:20 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_SSL_H
 
 # include "libft/libft.h"
+# include "md5.h"
 
 # define NAME		"ft_ssl"
 # define MAX_PARAM	10
@@ -31,7 +32,7 @@ typedef struct		s_param
 	size_t			flag;
 }					t_param;
 
-typedef size_t		(*t_fn)(void *, void *, int);
+typedef void		(*t_fn)(size_t, int, char **);
 
 typedef struct		s_cmd
 {
@@ -49,28 +50,30 @@ static t_param		g_md5_sha_params[] =
 	{
 		"-p",
 		"Echo stdin to stdout and append the checksum to stdout.",
-		2
+		1024
 	},
 	{
 		"-q",
-		"Quiet mode - only the checksum is printed out.  Overrides the -r option.",
+		"Quiet mode - only the checksum is printed out. "\
+		"Overrides the -r option.",
 		4
 	},
 	{
 		"-r",
-		"Reverses the format of the output.  Does nothing when combined with the -p option.",
+		"Reverses the format of the output.  Does nothing when combined "\
+		"with the -p option.",
 		8
 	},
 	{
 		"-s",
-		"Print a checksum of the given %~u~string%~-u~.",
-		16
+		"\x1b[14D %~u~string%~-u~\tPrint a checksum of the given string.",
+		65536
 	}
 };
 
 static t_cmd		g_commands[] =
 {
-	{"md5", dgst, 4, g_md5_sha_params, NULL},
+	{"md5", dgst, 4, g_md5_sha_params, process_md5},
 	{"sha256", dgst, 4, g_md5_sha_params, NULL}
 };
 
@@ -80,5 +83,6 @@ void				print_standard_commands(void);
 void				print_options_for_command(t_cmd *cmd);
 t_cmd				*check_commands(char *command);
 size_t				check_params(t_cmd *cmd, int *ac, char **av);
+char				*read_stdin(void);
 
 #endif

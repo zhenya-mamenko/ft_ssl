@@ -6,7 +6,7 @@
 #    By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/20 11:27:05 by emamenko          #+#    #+#              #
-#    Updated: 2019/03/20 12:45:18 by emamenko         ###   ########.fr        #
+#    Updated: 2019/03/20 18:33:35 by emamenko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 .PHONY:		$(NAME) all clean fclean re reclean del reexec
 
 NAME	=	ft_ssl
-SOURCES	=	ft_ssl.c print.c commands.c functions.c
+SOURCES	=	ft_ssl.c print.c commands.c functions.c input.c \
+			md5.c
 
 all:		$(NAME)
 
