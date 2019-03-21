@@ -6,25 +6,16 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:24:40 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 20:51:07 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 13:35:06 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
+#include "md5.h"
 
-char		*md5_file(char *s)
+static void	process_files(size_t f, u_int cnt, char **av)
 {
-	return (ft_ssprintf("ho-ho-ho, file: %s!", s));
-}
-
-char		*md5_str(char *s)
-{
-	return (ft_ssprintf("ho-ho-ho: %s!", s));
-}
-
-static void	process_files(size_t f, int cnt, char **av)
-{
-	int			i;
+	u_int		i;
 	int			fd;
 	char		*md5;
 	extern int	errno;
@@ -36,13 +27,57 @@ static void	process_files(size_t f, int cnt, char **av)
 		if (fd != -1)
 		{
 			print_hash((f & 8) && !(f & 4) ? MD5_TEMPLATE_R : MD5_TEMPLATE,
-				av[i], (md5 = md5_file(av[i])), f);
+				av[i], (md5 = md5_file(av[i], fd)), f);
 			ft_strdel(&md5);
+			close(fd);
 		}
 		else
 			file_error("md5", av[i], errno);
 		i++;
 	}
+}
+
+static char	*md5_digest(u_char digest[16])
+{
+	u_char	i;
+	char	*result;
+	char	*s;
+
+	result = ft_strnew(0);
+	i = 0;
+	while (i < 16)
+	{
+		s = ft_ssprintf("%02x", digest[i]);
+		ft_strsetdel(&result, ft_strjoin(result, s));
+		ft_strdel(&s);
+		i++;
+	}
+	return (result);
+}
+
+char		*md5_file(char *s, int fd)
+{
+	u_char	digest[16];
+	u_char	buf[1024];
+	t_ctx	ctx;
+	int		len;
+
+	md5_init(&ctx);
+	while (len = read(fd, buf, 1024))
+		md5_update(&ctx, buf, len);
+	md5_final(&ctx, digest);
+	return (md5_digest(digest));
+}
+
+char		*md5_str(char *s)
+{
+	u_char	digest[16];
+	t_ctx	ctx;
+
+	md5_init(&ctx);
+	md5_update(&ctx, s, ft_strlen(s));
+	md5_final(&ctx, digest);
+	return (md5_digest(digest));
 }
 
 void		process_md5(size_t f, int cnt, char **av)

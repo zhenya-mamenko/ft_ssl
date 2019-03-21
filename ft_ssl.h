@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:24:33 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 20:46:59 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 12:08:05 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdio.h>
 # include <sys/errno.h>
 # include "libft/libft.h"
-# include "md5.h"
 
 # define NAME		"ft_ssl"
 # define MAX_PARAM	10
@@ -90,5 +89,8 @@ void				print_hash(char *template, char *str, char *hash, size_t f);
 t_cmd				*check_commands(char *command);
 size_t				check_params(t_cmd *cmd, int *ac, char **av);
 char				*read_stdin(void);
+void				process_md5(size_t f, int cnt, char **av);
+char				*md5_str(char *s);
+char				*md5_file(char *s, int fd);
 
 #endif

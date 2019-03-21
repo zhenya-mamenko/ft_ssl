@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:28:41 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 11:10:22 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 13:47:50 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,22 @@
 # define ROL(x, n) (((x) << (n)) | ((x) >> (32 - (n))))
 
 # define AS(a,s,b) (a)=ROL((a),(s));(a)+=(b);
-# define FF(a,b,c,d,x,s,ac){(a)+=F((b),(c),(d))+(x)+(size_t)(ac);AS(a,s,b)}
-# define GG(a,b,c,d,x,s,ac){(a)+=G((b),(c),(d))+(x)+(size_t)(ac);AS(a,s,b)}
-# define HH(a,b,c,d,x,s,ac){(a)+=H((b),(c),(d))+(x)+(size_t)(ac);AS(a,s,b)}
-# define II(a,b,c,d,x,s,ac){(a)+=I((b),(c),(d))+(x)+(size_t)(ac);AS(a,s,b)}
+# define FF(a,b,c,d,x,s,ac) {(a)+=F((b),(c),(d))+(x)+(u_int)(ac);AS(a,s,b)}
+# define GG(a,b,c,d,x,s,ac) {(a)+=G((b),(c),(d))+(x)+(u_int)(ac);AS(a,s,b)}
+# define HH(a,b,c,d,x,s,ac) {(a)+=H((b),(c),(d))+(x)+(u_int)(ac);AS(a,s,b)}
+# define II(a,b,c,d,x,s,ac) {(a)+=I((b),(c),(d))+(x)+(u_int)(ac);AS(a,s,b)}
 
-void	process_md5(size_t f, int cnt, char **av);
+typedef struct			s_ctx
+{
+	u_int				state[4];
+	u_int				count[2];
+	unsigned char		buf[64];
+}						t_ctx;
+
+void					md5_init(t_ctx *ctx);
+void					md5_update(t_ctx *ctx, u_char *buf, u_int len);
+void					md5_final(t_ctx *ctx, u_char digest[16]);
+void					md5_transform(t_ctx *ctx, u_char b[64]);
+void					md5_decode(u_int *x, u_char *b, u_int len);
 
 #endif
