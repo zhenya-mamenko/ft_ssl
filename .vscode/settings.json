@@ -11,4 +11,5 @@
 	"42header.email": "emamenko@student.42.us.org",
 	"explorer.confirmDelete": false,
 	"explorer.confirmDragAndDrop": false,
+	"C_Cpp.intelliSenseEngineFallback": "Disabled",
 }

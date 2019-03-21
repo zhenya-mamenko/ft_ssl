@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:24:33 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 19:08:20 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/20 20:00:23 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void				error(char *message, int and_exit, int and_free);
 void				print_usage(void);
 void				print_standard_commands(void);
 void				print_options_for_command(t_cmd *cmd);
+void				print_hash(char *template, char *str, char *hash, size_t f);
 t_cmd				*check_commands(char *command);
 size_t				check_params(t_cmd *cmd, int *ac, char **av);
 char				*read_stdin(void);

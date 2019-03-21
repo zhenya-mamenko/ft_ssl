@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:23:08 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 19:56:25 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/20 19:59:55 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,12 @@ void		print_options_for_command(t_cmd *cmd)
 	exit(2);
 }
 
-void		print_hash(char *template)
+void		print_hash(char *template, char *str, char *hash, size_t f)
 {
-
+	if (f & 4)
+		ft_printf("%s\n", hash);
+	else if (f & 8)
+		ft_printf(template, hash, str);
+	else
+		ft_printf(template, str, hash);
 }
