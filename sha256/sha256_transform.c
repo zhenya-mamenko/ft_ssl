@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:44 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 19:37:33 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 22:50:03 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	sha256_decode(u_int *x, u_char *b)
 	while (j < 64)
 	{
 		x[i] = ((u_int)b[j + 3]) | (((u_int)b[j + 2]) << 8) |
-			(((u_int)b[j + 1]) << 16) | (((u_int)b[j]) << 24);
+			(((u_int)b[j + 1]) << 16) | (((u_int)b[j + 0]) << 24);
 		i++;
 		j += 4;
 	}
@@ -35,28 +35,28 @@ static void	sha256_decode(u_int *x, u_char *b)
 void		sha256_transform(t_ctx *ctx, u_char b[64])
 {
 	u_int	s[8];
-	u_int	i;
-	u_int	t;
+	u_int	t[3];
 	u_int	x[64];
 
 	sha256_decode(x, b);
-	i = -1;
-	while (++i < 8)
-		s[i] = ctx->state[i];
-	i = -1;
-	while (++i < 64)
+	t[0] = -1;
+	while (++t[0] < 8)
+		s[t[0]] = ctx->state[t[0]];
+	t[0] = -1;
+	while (++t[0] < 64)
 	{
-		t = s[7] + E1(s[4]) + CH(s[4], s[5], s[6]) + k[i] + x[i];
+		t[1] = s[7] + E1(s[4]) + CH(s[4], s[5], s[6]) + k[t[0]] + x[t[0]];
+		t[2] = E0(s[0]) + MA(s[0], s[1], s[2]);
 		s[7] = s[6];
 		s[6] = s[5];
 		s[5] = s[4];
-		s[4] = s[3] + t;
+		s[4] = s[3] + t[1];
 		s[3] = s[2];
 		s[2] = s[1];
 		s[1] = s[0];
-		s[0] = t + E0(s[0]) + MA(s[0], s[1], s[2]);
+		s[0] = t[1] + t[2];
 	}
-	i = -1;
-	while (++i < 8)
-		ctx->state[i] += s[i];
+	t[0] = -1;
+	while (++t[0] < 8)
+		ctx->state[t[0]] += s[t[0]];
 }

@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:24:40 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 19:41:35 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 19:49:31 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	process_files(size_t f, u_int cnt, char **av)
 	}
 }
 
-static char	*sha256_digest(u_char digest[64])
+static char	*sha256_digest(u_char digest[32])
 {
 	u_int	i;
 	char	*result;
@@ -45,7 +45,7 @@ static char	*sha256_digest(u_char digest[64])
 
 	result = ft_strnew(0);
 	i = 0;
-	while (i < 64)
+	while (i < 32)
 	{
 		s = ft_ssprintf("%02x", digest[i]);
 		ft_strsetdel(&result, ft_strjoin(result, s));
@@ -57,7 +57,7 @@ static char	*sha256_digest(u_char digest[64])
 
 char		*sha256_file(int fd)
 {
-	u_char	digest[64];
+	u_char	digest[32];
 	u_char	buf[1024];
 	t_ctx	ctx;
 	int		len;
@@ -71,7 +71,7 @@ char		*sha256_file(int fd)
 
 char		*sha256_str(char *s)
 {
-	u_char	digest[64];
+	u_char	digest[32];
 	t_ctx	ctx;
 
 	sha256_init(&ctx);

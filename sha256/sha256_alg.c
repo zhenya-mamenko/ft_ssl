@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:24:25 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 19:44:11 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 22:48:02 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		sha256_update(t_ctx *ctx, u_char *buf, u_int len)
 			ctx->bit_len += 512;
 			ctx->buf_len = 0;
 		}
+		i++;
 	}
 }
 
@@ -58,7 +59,7 @@ static void	sha256_encode(u_char *b, u_int *x, u_int len)
 		b[j + 3] = (u_char)(x[i] & 0xff);
 		b[j + 2] = (u_char)((x[i] >> 8) & 0xff);
 		b[j + 1] = (u_char)((x[i] >> 16) & 0xff);
-		b[j] = (u_char)((x[i] >> 24) & 0xff);
+		b[j + 0] = (u_char)((x[i] >> 24) & 0xff);
 		i++;
 		j += 4;
 	}
@@ -70,7 +71,7 @@ void		sha256_final(t_ctx *ctx, u_char digest[32])
 
 	i = ctx->buf_len;
 	ctx->buf[i] = 0x80;
-	ft_memset(&(ctx->buf[i]), 0, (i < 56 ? 56 : 64) - i - 1);
+	ft_memset(&(ctx->buf[i + 1]), 0, (i < 56 ? 56 : 64) - i - 1);
 	if (i >= 56)
 	{
 		sha256_transform(ctx, ctx->buf);
@@ -80,7 +81,7 @@ void		sha256_final(t_ctx *ctx, u_char digest[32])
 	i = 0;
 	while (i < 8)
 	{
-		ctx->buf[63 - i] = ctx->bit_len >> (i * 8);
+		ctx->buf[63 - i] = (u_char)((ctx->bit_len >> (i * 8)) & 0xff);
 		i++;
 	}
 	sha256_transform(ctx, ctx->buf);

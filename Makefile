@@ -6,7 +6,7 @@
 #    By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/20 11:27:05 by emamenko          #+#    #+#              #
-#    Updated: 2019/03/21 19:43:59 by emamenko         ###   ########.fr        #
+#    Updated: 2019/03/21 19:51:30 by emamenko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ all:		$(NAME)
 
 $(NAME):
 			make -C libft/
-			gcc -Wall -Wextra -Werror -o $(NAME) -Llibft -lft $(SOURCES)
+			gcc $(DEBUG) -Wall -Wextra -Werror -o $(NAME) -Llibft -lft $(SOURCES)
 
 clean:
 			make -C libft/ clean
