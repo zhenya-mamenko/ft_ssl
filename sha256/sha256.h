@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 17:57:32 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 19:45:36 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 23:14:33 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define SI0(x) (ROR(x, 7) ^ ROR(x, 18) ^ ((x) >> 3))
 # define SI1(x) (ROR(x, 17) ^ ROR(x, 19) ^ ((x) >> 10))
 
-static const u_int k[64] = {
+static const u_int g_k[64] = {
 	0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1,
 	0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
 	0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786,
