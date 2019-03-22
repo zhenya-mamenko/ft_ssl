@@ -6,14 +6,14 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 12:15:10 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 14:24:05 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:14:50 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ssl.h"
 #include "md5.h"
 
-static void	round1(u_int *s, u_int x[16])
+static void	round1(u_int s[4], u_int x[16])
 {
 	FF(s[0], s[1], s[2], s[3], x[0], S11, 0xd76aa478);
 	FF(s[3], s[0], s[1], s[2], x[1], S12, 0xe8c7b756);
@@ -33,7 +33,7 @@ static void	round1(u_int *s, u_int x[16])
 	FF(s[1], s[2], s[3], s[0], x[15], S14, 0x49b40821);
 }
 
-static void	round2(u_int *s, u_int x[16])
+static void	round2(u_int s[4], u_int x[16])
 {
 	GG(s[0], s[1], s[2], s[3], x[1], S21, 0xf61e2562);
 	GG(s[3], s[0], s[1], s[2], x[6], S22, 0xc040b340);
@@ -53,7 +53,7 @@ static void	round2(u_int *s, u_int x[16])
 	GG(s[1], s[2], s[3], s[0], x[12], S24, 0x8d2a4c8a);
 }
 
-static void	round3(u_int *s, u_int x[16])
+static void	round3(u_int s[4], u_int x[16])
 {
 	HH(s[0], s[1], s[2], s[3], x[5], S31, 0xfffa3942);
 	HH(s[3], s[0], s[1], s[2], x[8], S32, 0x8771f681);
@@ -73,7 +73,7 @@ static void	round3(u_int *s, u_int x[16])
 	HH(s[1], s[2], s[3], s[0], x[2], S34, 0xc4ac5665);
 }
 
-static void	round4(u_int *s, u_int x[16])
+static void	round4(u_int s[4], u_int x[16])
 {
 	II(s[0], s[1], s[2], s[3], x[0], S41, 0xf4292244);
 	II(s[3], s[0], s[1], s[2], x[7], S42, 0x432aff97);
@@ -96,10 +96,20 @@ static void	round4(u_int *s, u_int x[16])
 void		md5_transform(t_ctx *ctx, u_char b[64])
 {
 	u_int	x[16];
+	u_int	state[4];
+	u_int	i;
 
 	md5_decode(x, b, 64);
-	round1(ctx->state, x);
-	round2(ctx->state, x);
-	round3(ctx->state, x);
-	round4(ctx->state, x);
+	ft_memcpy(state, ctx->state, sizeof(state));
+	round1(state, x);
+	round2(state, x);
+	round3(state, x);
+	round4(state, x);
+	i = 0;
+	while (i < 4)
+	{
+		ctx->state[i] += state[i];
+		i++;
+	}
+	ft_memset(x, 0, sizeof(x));
 }

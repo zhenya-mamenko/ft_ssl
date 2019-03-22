@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 21:33:03 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 14:14:58 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:14:18 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		md5_init(t_ctx *ctx)
 	ctx->state[3] = 0x10325476;
 	ctx->count[0] = 0;
 	ctx->count[1] = 0;
+	ft_memset(ctx->buf, 0, 64);
 }
 
 void		md5_update(t_ctx *ctx, u_char *buf, u_int len)
@@ -77,6 +78,8 @@ void		md5_final(t_ctx *ctx, u_char digest[16])
 	u_char	pad[64];
 
 	ft_memset(pad, 0, 64);
+	ft_memset(bits, 0, 8);
+	md5_encode(bits, ctx->count, 8);
 	pad[0] = 0x80;
 	index = (unsigned int)((ctx->count[0] >> 3) & 0x3f);
 	p_len = (index < 56) ? (56 - index) : (120 - index);
@@ -95,8 +98,8 @@ void		md5_decode(u_int *x, u_char *b, u_int len)
 	j = 0;
 	while (j < len)
 	{
-		x[i] = ((u_int)b[j]) | (((u_int)b[j+1]) << 8) |
-			(((u_int)b[j+2]) << 16) | (((u_int)b[j+3]) << 24);
+		x[i] = ((u_int)b[j]) | (((u_int)b[j + 1]) << 8) |
+			(((u_int)b[j + 2]) << 16) | (((u_int)b[j + 3]) << 24);
 		i++;
 		j += 4;
 	}

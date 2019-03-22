@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:24:40 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 14:14:51 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 17:13:51 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	process_files(size_t f, u_int cnt, char **av)
 
 static char	*md5_digest(u_char digest[16])
 {
-	u_char	i;
+	u_int	i;
 	char	*result;
 	char	*s;
 
@@ -82,28 +82,26 @@ char		*md5_str(char *s)
 
 void		process_md5(size_t f, int cnt, char **av)
 {
-	char	*stdin;
+	char	*s;
 	char	*md5;
 
-	stdin = NULL;
+	s = NULL;
 	if ((f & 1024) || cnt == 0)
-		stdin = read_stdin();
-	if (stdin && ft_strlen(stdin) != 0)
+		s = read_stdin();
+	if (s && ft_strlen(s) != 0)
 	{
-		if (f & 1024)
-			ft_printf("%s\n", stdin);
-		md5 = md5_str(stdin);
-		print_hash("%s\n", stdin, md5, 0);
-		ft_strdel(&stdin);
+		md5 = md5_str(s);
+		print_hash((f & 1024) ? "%s%s\n" : "%s\n", s, md5, (f & 1024) ? 0 : 4);
+		ft_strdel(&s);
 		ft_strdel(&md5);
 	}
 	if ((f & 65536) && cnt--)
 	{
-		stdin = ft_ssprintf("\"%s\"", *av);
+		s = ft_ssprintf("\"%s\"", *av);
 		print_hash((f & 8) && !(f & 4) ? MD5_TEMPLATE_R : MD5_TEMPLATE,
-			stdin, (md5 = md5_str(*av)), f);
+			s, (md5 = md5_str(*av)), f);
 		ft_strdel(&md5);
-		ft_strdel(&stdin);
+		ft_strdel(&s);
 		av++;
 	}
 	process_files(f, cnt, av);

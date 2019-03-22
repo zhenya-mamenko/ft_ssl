@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 17:35:08 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 20:40:30 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:29:14 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ char	*read_stdin(void)
 		ft_strdel(&line);
 		ft_strsetdel(&buf, ft_strjoin(buf, "\n"));
 	}
-	buf[ft_strlen(buf) - 1] = '\0';
 	return (buf);
 }
