@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:04:06 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 14:05:14 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 19:41:50 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 # include <stdlib.h>
 
 void	process_md5(size_t f, int cnt, char **av);
+void	process_sha256(size_t f, int cnt, char **av);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:24:33 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 14:13:47 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/21 19:45:12 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static t_param		g_md5_sha_params[] =
 static t_cmd		g_commands[] =
 {
 	{"md5", dgst, 4, g_md5_sha_params, process_md5},
-	{"sha256", dgst, 4, g_md5_sha_params, NULL}
+	{"sha256", dgst, 4, g_md5_sha_params, process_sha256}
 };
 
 void				error(char *message, int and_exit, int and_free);
@@ -92,5 +92,7 @@ size_t				check_params(t_cmd *cmd, int *ac, char **av);
 char				*read_stdin(void);
 char				*md5_str(char *s);
 char				*md5_file(int fd);
+char				*sha256_str(char *s);
+char				*sha256_file(int fd);
 
 #endif
