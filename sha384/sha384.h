@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   processes.h                                        :+:      :+:    :+:   */
+/*   sha384.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/21 14:04:06 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/23 15:50:40 by emamenko         ###   ########.fr       */
+/*   Created: 2019/03/21 17:57:32 by emamenko          #+#    #+#             */
+/*   Updated: 2019/03/23 15:45:33 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROCESSES_H
-# define PROCESSES_H
+#ifndef SHA384_H
+# define SHA384_H
 
-# include <stdlib.h>
+# include "../sha512/sha512.h"
 
-void	process_md5(size_t f, int cnt, char **av);
-void	process_sha256(size_t f, int cnt, char **av);
-void	process_sha384(size_t f, int cnt, char **av);
-void	process_sha512(size_t f, int cnt, char **av);
+# define SHA384_TPL		"SHA384 (%s) = %s\n"
+# define SHA384_TPL_R	"%s %s\n"
+
+void	sha384_init(t_ctx *ctx);
 
 #endif

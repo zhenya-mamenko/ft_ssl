@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Debug",
 			"program": "${workspaceFolder}/ft_ssl",
-			"args": ["md5", "-rstest"],
+			"args": ["sha512", "-r", "test"],
 			"cwd": "${workspaceFolder}"
 		}
 	]

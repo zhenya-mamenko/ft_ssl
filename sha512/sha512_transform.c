@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:44 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/23 11:43:26 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/23 15:54:11 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	sha512_decode(uint64_t *x, u_char *b)
 	while (j < 128)
 	{
 		x[i] = ((uint64_t)b[j + 7]) | (((uint64_t)b[j + 6]) << 8) |
-			(((uint64_t)b[j + 5]) << 16) | (((uint64_t)b[j + 5]) << 24) |
+			(((uint64_t)b[j + 5]) << 16) | (((uint64_t)b[j + 4]) << 24) |
 			(((uint64_t)b[j + 3]) << 32) | (((uint64_t)b[j + 2]) << 40) |
 			(((uint64_t)b[j + 1]) << 48) | (((uint64_t)b[j + 0]) << 56);
 		i++;

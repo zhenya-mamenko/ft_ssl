@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:24:25 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/23 12:37:44 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/23 15:35:13 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,19 @@ void		sha512_init(t_ctx *ctx)
 {
 	ctx->len_hi = 0LL;
 	ctx->len_lo = 0LL;
+	ctx->buf_len = 0;
 	ft_memset(ctx->buf, 0, 128);
-	ctx->state[0] = 0x6a09e667f3bcc908LL;
-	ctx->state[1] = 0xbb67ae8584caa73bLL;
-	ctx->state[2] = 0x3c6ef372fe94f82bLL;
-	ctx->state[3] = 0xa54ff53a5f1d36f1LL;
-	ctx->state[4] = 0x510e527fade682d1LL;
-	ctx->state[5] = 0x9b05688c2b3e6c1fLL;
-	ctx->state[6] = 0x1f83d9abfb41bd6bLL;
-	ctx->state[7] = 0x5be0cd19137e2179LL;
+	ctx->state[0] = 0x6a09e667f3bcc908ULL;
+	ctx->state[1] = 0xbb67ae8584caa73bULL;
+	ctx->state[2] = 0x3c6ef372fe94f82bULL;
+	ctx->state[3] = 0xa54ff53a5f1d36f1ULL;
+	ctx->state[4] = 0x510e527fade682d1ULL;
+	ctx->state[5] = 0x9b05688c2b3e6c1fULL;
+	ctx->state[6] = 0x1f83d9abfb41bd6bULL;
+	ctx->state[7] = 0x5be0cd19137e2179ULL;
 }
 
-void		sha512_update(t_ctx *ctx, u_char *buf, uint len)
+void		sha512_update(t_ctx *ctx, u_char *buf, uint64_t len)
 {
 	uint		i;
 	uint64_t	l;
@@ -41,7 +42,7 @@ void		sha512_update(t_ctx *ctx, u_char *buf, uint len)
 		if (ctx->buf_len == 128)
 		{
 			sha512_transform(ctx, ctx->buf);
-			l = ctx->len_lo + 512;
+			l = ctx->len_lo + 128 * 8;
 			if (l < ctx->len_lo)
 				ctx->len_hi++;
 			ctx->len_lo = l;
