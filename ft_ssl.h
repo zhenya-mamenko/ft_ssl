@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:24:33 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/23 15:52:35 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/23 16:05:35 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static t_param		g_md5_sha_params[] =
 	}
 };
 
-static int			g_cmd_cnt = 3;
+static int			g_cmd_cnt = 4;
 static t_cmd		g_commands[] =
 {
 	{"md5", dgst, 4, g_md5_sha_params, 0, process_md5},
