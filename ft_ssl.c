@@ -6,11 +6,28 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:15:38 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/20 20:55:22 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/22 18:32:24 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
+
+t_strings	g_ss[100];
+int			g_ss_cnt = 0;
+
+static t_cmd	*check_commands(char *command)
+{
+	int		i;
+
+	i = 0;
+	while (i < g_cmd_cnt)
+	{
+		if (ft_strcmp(command, g_commands[i].command) == 0)
+			return (&g_commands[i]);
+		i++;
+	}
+	return (NULL);
+}
 
 static size_t	process_params(t_cmd *cmd, int *cnt, char **av)
 {
@@ -19,9 +36,12 @@ static size_t	process_params(t_cmd *cmd, int *cnt, char **av)
 	result = check_params(cmd, cnt, av);
 	if (result == 1)
 	{
-		error(ft_ssprintf("%s: '%s' is an illegal option.\n",
-			cmd->command, av[*cnt - 1]), 0, 1);
-		print_options_for_command(cmd);
+		if (cmd->exact_match_params == 1)
+		{
+			error(ft_ssprintf("%s: illegal option '%s'.\n",
+				cmd->command, av[*cnt]), 0, 1);
+			print_options_for_command(cmd);
+		}
 	}
 	return (result);
 }
@@ -43,11 +63,5 @@ int				main(int ac, char **av)
 	f = 0;
 	if (cnt != 0)
 		f = process_params(cmd, &cnt, av + 2);
-	if (cnt == 0 && (f & 65536))
-	{
-		error(ft_ssprintf("%s: '%s' option requires an argument.\n",
-			cmd->command, av[ac - 1]), 0, 1);
-		print_options_for_command(cmd);
-	}
 	(cmd->fn)(f, cnt, &av[ac - cnt]);
 }

@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:23:08 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 16:20:10 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/22 18:33:03 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	print_commands_by_type(t_ct type)
 	int		i;
 
 	i = 0;
-	while (i < g_cmd_count)
+	while (i < g_cmd_cnt)
 	{
 		if (g_commands[i].type == type)
 			ft_printf("%s\n", g_commands[i].command);

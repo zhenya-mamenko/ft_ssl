@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:24:33 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 19:45:12 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/22 22:13:07 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,41 +44,47 @@ typedef struct		s_cmd
 	t_ct			type;
 	int				param_count;
 	t_param			*params;
+	int				exact_match_params;
 	t_fn			fn;
 }					t_cmd;
 
-static int			g_cmd_count = 2;
+typedef struct		s_strings
+{
+	size_t			f;
+	char			*s;
+}					t_strings;
 
+static int			g_cmd_cnt = 2;
 static t_param		g_md5_sha_params[] =
 {
 	{
-		"-p",
+		"s",
+		"\x1b[15D %~u~string%~-u~\tPrint a checksum of the given string.",
+		65536
+	},
+	{
+		"p",
 		"Echo stdin to stdout and append the checksum to stdout.",
 		1024
 	},
 	{
-		"-q",
+		"q",
 		"Quiet mode - only the checksum is printed out. "\
 		"Overrides the -r option.",
 		4
 	},
 	{
-		"-r",
+		"r",
 		"Reverses the format of the output.  Does nothing when combined "\
 		"with the -p option.",
 		8
-	},
-	{
-		"-s",
-		"\x1b[14D %~u~string%~-u~\tPrint a checksum of the given string.",
-		65536
 	}
 };
 
 static t_cmd		g_commands[] =
 {
-	{"md5", dgst, 4, g_md5_sha_params, process_md5},
-	{"sha256", dgst, 4, g_md5_sha_params, process_sha256}
+	{"md5", dgst, 4, g_md5_sha_params, 0, process_md5},
+	{"sha256", dgst, 4, g_md5_sha_params, 0, process_sha256}
 };
 
 void				error(char *message, int and_exit, int and_free);
@@ -87,7 +93,6 @@ void				print_usage(void);
 void				print_standard_commands(void);
 void				print_options_for_command(t_cmd *cmd);
 void				print_hash(char *template, char *str, char *hash, size_t f);
-t_cmd				*check_commands(char *command);
 size_t				check_params(t_cmd *cmd, int *ac, char **av);
 char				*read_stdin(void);
 char				*md5_str(char *s);

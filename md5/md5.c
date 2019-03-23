@@ -6,12 +6,15 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:24:40 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 17:13:51 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/22 18:38:57 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ssl.h"
 #include "md5.h"
+
+extern t_strings	g_ss[100];
+extern int			g_ss_cnt;
 
 static void	process_files(size_t f, u_int cnt, char **av)
 {
@@ -84,9 +87,10 @@ void		process_md5(size_t f, int cnt, char **av)
 {
 	char	*s;
 	char	*md5;
+	int		i;
 
 	s = NULL;
-	if ((f & 1024) || cnt == 0)
+	if ((f & 1024) || (cnt == 0 && g_ss_cnt == 0))
 		s = read_stdin();
 	if (s && ft_strlen(s) != 0)
 	{
@@ -95,14 +99,14 @@ void		process_md5(size_t f, int cnt, char **av)
 		ft_strdel(&s);
 		ft_strdel(&md5);
 	}
-	if ((f & 65536) && cnt--)
+	i = -1;
+	while (++i < g_ss_cnt)
 	{
-		s = ft_ssprintf("\"%s\"", *av);
+		s = ft_ssprintf("\"%s\"", g_ss[i].s);
 		print_hash((f & 8) && !(f & 4) ? MD5_TEMPLATE_R : MD5_TEMPLATE,
-			s, (md5 = md5_str(*av)), f);
+			s, (md5 = md5_str(g_ss[i].s)), f);
 		ft_strdel(&md5);
 		ft_strdel(&s);
-		av++;
 	}
 	process_files(f, cnt, av);
 }
