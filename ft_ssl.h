@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:24:33 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/22 22:13:07 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/23 12:37:08 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct		s_strings
 	char			*s;
 }					t_strings;
 
-static int			g_cmd_cnt = 2;
 static t_param		g_md5_sha_params[] =
 {
 	{
@@ -81,10 +80,12 @@ static t_param		g_md5_sha_params[] =
 	}
 };
 
+static int			g_cmd_cnt = 3;
 static t_cmd		g_commands[] =
 {
 	{"md5", dgst, 4, g_md5_sha_params, 0, process_md5},
-	{"sha256", dgst, 4, g_md5_sha_params, 0, process_sha256}
+	{"sha256", dgst, 4, g_md5_sha_params, 0, process_sha256},
+	{"sha512", dgst, 4, g_md5_sha_params, 0, process_sha512}
 };
 
 void				error(char *message, int and_exit, int and_free);
@@ -99,5 +100,7 @@ char				*md5_str(char *s);
 char				*md5_file(int fd);
 char				*sha256_str(char *s);
 char				*sha256_file(int fd);
+char				*sha512_str(char *s);
+char				*sha512_file(int fd);
 
 #endif
