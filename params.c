@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:49:55 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/22 22:10:44 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/23 20:34:51 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 extern t_strings	g_ss[100];
 extern int			g_ss_cnt;
+extern int			g_exit_value;
 
 static void	check_next_arg(t_cmd *cmd, char *param, int i, int ac)
 {

@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:15:38 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/22 18:32:24 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/23 20:36:19 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_strings	g_ss[100];
 int			g_ss_cnt = 0;
+int			g_exit_value = 0;
 
 static t_cmd	*check_commands(char *command)
 {
@@ -64,4 +65,5 @@ int				main(int ac, char **av)
 	if (cnt != 0)
 		f = process_params(cmd, &cnt, av + 2);
 	(cmd->fn)(f, cnt, &av[ac - cnt]);
+	return (g_exit_value);
 }
