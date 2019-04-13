@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:23:08 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/23 13:09:44 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/23 21:06:08 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	print_commands_by_type(t_ct type)
 void		print_standard_commands(void)
 {
 	ft_printf("\nStandard commands:\n");
+	print_commands_by_type(std);
 	ft_printf("\nMessage Digest commands:\n");
 	print_commands_by_type(dgst);
 	ft_printf("\nCipher commands:\n");

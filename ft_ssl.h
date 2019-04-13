@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:24:33 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/23 20:36:09 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/03/23 21:05:50 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 typedef enum		e_ct
 {
 	dgst,
-	ciph
+	ciph,
+	std
 }					t_ct;
 
 typedef struct		s_param
