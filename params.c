@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:49:55 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/23 20:34:51 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/04/12 18:11:07 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	check_exact_params(t_cmd *cmd, char **av, int *i, int ac)
 			break ;
 	if (j == cmd->param_count)
 		return (-1);
-	if (cmd->params[j].flag == 65536)
+	if (cmd->params[j].flag & 65536)
 	{
 		check_next_arg(cmd, cmd->params[j].param, *i + 1, ac);
 		g_ss[g_ss_cnt++].s = av[++(*i)];
@@ -65,7 +65,7 @@ static int	check_partial_params(t_cmd *cmd, char **av, int *i, int ac)
 	while (++j < cmd->param_count)
 		if ((k = ft_strstri(p, cmd->params[j].param)) != -1)
 		{
-			if ((pm = cmd->params[j]).flag == 65536)
+			if ((pm = cmd->params[j]).flag & 65536)
 			{
 				g_ss[g_ss_cnt++].s = (k == (ft_strlen(p) - 1)) ? av[++(*i)] :
 					&av[(*i)][ft_strstri(av[(*i)], pm.param) + 1];

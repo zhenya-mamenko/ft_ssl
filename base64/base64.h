@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   processes.h                                        :+:      :+:    :+:   */
+/*   base64.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/21 14:04:06 by emamenko          #+#    #+#             */
-/*   Updated: 2019/04/12 18:19:40 by emamenko         ###   ########.fr       */
+/*   Created: 2019/03/20 18:28:41 by emamenko          #+#    #+#             */
+/*   Updated: 2019/04/12 21:15:22 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROCESSES_H
-# define PROCESSES_H
+#ifndef BASE64_H
+# define BASE64_H
 
-# include <stdlib.h>
+# include <sys/types.h>
 
-void	process_md5(size_t f, int cnt, char **av);
-void	process_sha256(size_t f, int cnt, char **av);
-void	process_sha384(size_t f, int cnt, char **av);
-void	process_sha512(size_t f, int cnt, char **av);
-void	process_base64(size_t f, int cnt, char **av);
+static const char base[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+unsigned char	*base64_encode(unsigned char *b);
+unsigned char	*base64_decode(unsigned char *b);
 
 #endif
