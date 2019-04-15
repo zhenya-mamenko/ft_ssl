@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:23:08 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/23 21:06:08 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/04/14 22:06:36 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		print_options_for_command(t_cmd *cmd)
 	while (i < cmd->param_count)
 	{
 		ft_sprintf(&s, cmd->params[i].description);
-		ft_printf("\t%s\t%s\n", cmd->params[i].param, s);
+		ft_printf("\t-%s\t%s\n", cmd->params[i].param, s);
 		ft_strdel(&s);
 		i++;
 	}

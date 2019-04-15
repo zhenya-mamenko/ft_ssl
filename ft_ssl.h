@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:24:33 by emamenko          #+#    #+#             */
-/*   Updated: 2019/04/14 14:18:06 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/04/15 10:48:05 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static t_param		g_md5_sha_params[] =
 {
 	{
 		"s",
-		"\x1b[15D %~u~string%~-u~\tPrint a checksum of the given string.",
+		"\x1b[14D %~u~string%~-u~\tPrint a checksum of the given string.",
 		65536
 	},
 	{
@@ -85,13 +85,13 @@ static t_param		g_base64_params[] =
 {
 	{
 		"i",
-		"\x1b[15D %~u~input_file%~-u~\tRead input from input_file.",
-		65536 + 16
+		"\x1b[14D %~u~input_file%~-u~\tRead input from input_file.",
+		65536
 	},
 	{
 		"o",
-		"\x1b[15D %~u~output_file%~-u~\tWrite output to output_file.",
-		65536 + 32
+		"\x1b[14D %~u~output_file%~-u~\tWrite output to output_file.",
+		131072
 	},
 	{
 		"d",
@@ -105,14 +105,14 @@ static t_param		g_base64_params[] =
 	}
 };
 
-static int			g_cmd_cnt = 4;
+static int			g_cmd_cnt = 5;
 static t_cmd		g_commands[] =
 {
 	{"md5", dgst, 4, g_md5_sha_params, 0, process_md5},
 	{"sha256", dgst, 4, g_md5_sha_params, 0, process_sha256},
 	{"sha384", dgst, 4, g_md5_sha_params, 0, process_sha384},
 	{"sha512", dgst, 4, g_md5_sha_params, 0, process_sha512},
-	{"sha512", ciph, 4, g_base64_params, 0, process_base64},
+	{"base64", ciph, 4, g_base64_params, 0, process_base64},
 };
 
 void				error(char *message, int and_exit, int and_free);
@@ -132,6 +132,6 @@ char				*sha384_file(int fd);
 char				*sha512_str(char *s);
 char				*sha512_file(int fd);
 char				*base64_str(char *s, int mode);
-char				*base64_file(int fd, int mode);
+char				*base64_file(char *fname, int mode);
 
 #endif
