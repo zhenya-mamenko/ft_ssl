@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 17:57:32 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/23 15:34:50 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/04/20 21:25:33 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/types.h>
 
 # define SHA512_TPL		"SHA512 (%s) = %s\n"
-# define SHA512_TPL_R	"%s %s\n"
+# define SHA512_R		"%s %s\n"
 
 # define ROR(a,b) (((a) >> (b)) | ((a) << (64 - (b))))
 

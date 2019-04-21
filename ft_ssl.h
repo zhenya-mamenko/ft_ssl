@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:24:33 by emamenko          #+#    #+#             */
-/*   Updated: 2019/04/15 10:48:05 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/04/17 16:10:27 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,56 @@ static t_param		g_base64_params[] =
 	}
 };
 
-static int			g_cmd_cnt = 5;
+static t_param		g_des_params[] =
+{
+	{
+		"i",
+		"\x1b[14D %~u~input_file%~-u~\tRead input from input_file.",
+		65536
+	},
+	{
+		"o",
+		"\x1b[14D %~u~output_file%~-u~\tWrite output to output_file.",
+		131072
+	},
+	{
+		"d",
+		"Decrypt the input data.",
+		4
+	},
+	{
+		"e",
+		"Encrypt the input data (default).",
+		8
+	},
+	{
+		"a",
+		"Perform base64 encoding/decoding.",
+		16
+	},
+	{
+		"k",
+		"\x1b[14D %~u~key%~-u~\tKey to use, specified as a hexidecimal string.",
+		262144
+	},
+	{
+		"p",
+		"\x1b[14D %~u~password%~-u~\tPassword source in ascii.",
+		524288
+	},
+	{
+		"s",
+		"\x1b[14D %~u~salt%~-u~\tSalt to use, specified as a hexidecimal string.",
+		524288
+	},
+	{
+		"v",
+		"\x1b[14D %~u~IV%~-u~\tIV to use, specified as a hexidecimal string.",
+		1048576
+	},
+};
+
+static int			g_cmd_cnt = 6;
 static t_cmd		g_commands[] =
 {
 	{"md5", dgst, 4, g_md5_sha_params, 0, process_md5},
@@ -113,6 +162,9 @@ static t_cmd		g_commands[] =
 	{"sha384", dgst, 4, g_md5_sha_params, 0, process_sha384},
 	{"sha512", dgst, 4, g_md5_sha_params, 0, process_sha512},
 	{"base64", ciph, 4, g_base64_params, 0, process_base64},
+	{"des", ciph, 9, g_des_params, 0, process_base64},
+	{"des-cbc", ciph, 9, g_des_params, 0, process_base64},
+	{"des-ecb", ciph, 9, g_des_params, 0, process_base64},
 };
 
 void				error(char *message, int and_exit, int and_free);

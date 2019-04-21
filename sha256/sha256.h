@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 17:57:32 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 23:14:33 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/04/20 21:23:34 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/types.h>
 
 # define SHA256_TPL		"SHA256 (%s) = %s\n"
-# define SHA256_TPL_R	"%s %s\n"
+# define SHA256_R		"%s %s\n"
 
 # define ROR(a,b) (((a) >> (b)) | ((a) << (32 - (b))))
 

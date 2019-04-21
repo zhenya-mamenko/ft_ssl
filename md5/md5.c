@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:24:40 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/22 18:38:57 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/04/20 21:19:28 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	process_files(size_t f, u_int cnt, char **av)
 		fd = open(av[i], O_RDONLY);
 		if (fd != -1)
 		{
-			print_hash((f & 8) && !(f & 4) ? MD5_TEMPLATE_R : MD5_TEMPLATE,
+			print_hash((f & 8) && !(f & 4) ? MD5_TPL_R : MD5_TPL,
 				av[i], (md5 = md5_file(fd)), f);
 			ft_strdel(&md5);
 			close(fd);
@@ -103,8 +103,8 @@ void		process_md5(size_t f, int cnt, char **av)
 	while (++i < g_ss_cnt)
 	{
 		s = ft_ssprintf("\"%s\"", g_ss[i].s);
-		print_hash((f & 8) && !(f & 4) ? MD5_TEMPLATE_R : MD5_TEMPLATE,
-			s, (md5 = md5_str(g_ss[i].s)), f);
+		print_hash((g_ss[i].f & 8) && !(g_ss[i].f & 4) ? MD5_TPL_R : MD5_TPL,
+			s, (md5 = md5_str(g_ss[i].s)), g_ss[i].f);
 		ft_strdel(&md5);
 		ft_strdel(&s);
 	}

@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:28:41 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/21 14:10:49 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/04/20 21:18:44 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <sys/types.h>
 
-# define MD5_TEMPLATE	"MD5 (%s) = %s\n"
-# define MD5_TEMPLATE_R	"%s %s\n"
+# define MD5_TPL	"MD5 (%s) = %s\n"
+# define MD5_TPL_R	"%s %s\n"
 
 # define S11 7
 # define S12 12

@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 11:49:55 by emamenko          #+#    #+#             */
-/*   Updated: 2019/04/15 10:12:11 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/04/15 19:12:39 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	check_exact_params(t_cmd *cmd, char **av, int *i, int ac)
 
 static int	error_in_pparams(t_cmd *cmd, char *p)
 {
-	error(ft_ssprintf("%s: illegal option(s) '-%s'.\n", cmd->command, p), 0, 1);
+	error(ft_ssprintf("%s: illegal option(s) -- %s.\n", cmd->command, p), 0, 1);
 	print_options_for_command(cmd);
 	return (-1);
 }

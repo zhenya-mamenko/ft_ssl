@@ -6,7 +6,7 @@
 /*   By: emamenko <emamenko@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:24:40 by emamenko          #+#    #+#             */
-/*   Updated: 2019/03/23 13:32:36 by emamenko         ###   ########.fr       */
+/*   Updated: 2019/04/20 21:26:09 by emamenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	process_files(size_t f, u_int cnt, char **av)
 		fd = open(av[i], O_RDONLY);
 		if (fd != -1)
 		{
-			print_hash((f & 8) && !(f & 4) ? SHA512_TPL_R : SHA512_TPL,
+			print_hash((f & 8) && !(f & 4) ? SHA512_R : SHA512_TPL,
 				av[i], (sha512 = sha512_file(fd)), f);
 			ft_strdel(&sha512);
 			close(fd);
@@ -104,8 +104,8 @@ void		process_sha512(size_t f, int cnt, char **av)
 	while (++i < g_ss_cnt)
 	{
 		s = ft_ssprintf("\"%s\"", g_ss[i].s);
-		print_hash((f & 8) && !(f & 4) ? SHA512_TPL_R : SHA512_TPL,
-			s, (sha512 = sha512_str(g_ss[i].s)), f);
+		print_hash((g_ss[i].f & 8) && !(g_ss[i].f & 4) ? SHA512_R : SHA512_TPL,
+			s, (sha512 = sha512_str(g_ss[i].s)), g_ss[i].f);
 		ft_strdel(&sha512);
 		ft_strdel(&s);
 	}
